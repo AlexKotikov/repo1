@@ -9,13 +9,16 @@ public class NavigationHelper extends HelperBase {
 		
 	}
 
-	public void backToContactsPAge() {
-		 click(By.linkText("home page"));
+	public void backToHomePage() {
+		 click(By.linkText("home"));
 	}
 
 	public void goToSiteHome() {
-		driver.get(manager.baseUrl + "/group.php");
+		driver.get(manager.baseUrl );//+ "/group.php"
 		
 	}
-
+	public void goToBirthdaysPage() {
+		 click(By.linkText("next birthdays"));
+		 
+	}
 }

@@ -7,6 +7,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import TestsForApp.ContactsDataStructure;
+
 
 
 public abstract class HelperBase {
@@ -65,7 +67,9 @@ protected void click(By name1) {
 	driver.findElement(name1).click();
 }
 protected void selectByText(By locator, String seltext) {
+	if (seltext != null){
 	new Select(driver.findElement(locator)).selectByVisibleText(seltext);
+	}
 }
 
 public void sendContactsForm() {
@@ -77,5 +81,22 @@ public void startToAddingOfNewContact() {
 	
  
 }
+
+public void updateForm() {
+
+	click(By.name("update"));
+}
+public void deleteForm() {
+	click (By.xpath("//form[@action=\"delete.php\"]/input[@type=\"submit\"]"));	
+}
+
+
+public void modifiyForm() {
+
+	click(By.name("modifiy"));
+}
+
+
+ 
 
 }

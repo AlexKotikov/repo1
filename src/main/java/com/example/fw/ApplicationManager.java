@@ -14,8 +14,16 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper  groupHelper;
 	private ContactsHelper  contactsHelper;
-	
+	private BirthdaysHelper birthdaysHelper;
 	 
+	public BirthdaysHelper getBirthdaysHelper(){
+		if (birthdaysHelper == null) {
+			birthdaysHelper = new BirthdaysHelper(this);
+		}
+		
+		return birthdaysHelper;
+	}
+	
 	public ContactsHelper getContactsHelper(){
 		if (contactsHelper == null) {
 			contactsHelper = new ContactsHelper(this);
@@ -43,10 +51,8 @@ public class ApplicationManager {
 	
 	public ApplicationManager() {
 		driver = new FirefoxDriver();
-	    baseUrl = "http://mysite/";
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
-	    navigationHelper =  new NavigationHelper(this);
-		groupHelper  = new GroupHelper(this);   
+	    baseUrl = "http://mysite/index.php";
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);		
 	}
 	
 	
