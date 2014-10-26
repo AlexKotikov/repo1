@@ -14,15 +14,10 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper  groupHelper;
 	private ContactsHelper  contactsHelper;
-	private BirthdaysHelper birthdaysHelper;
+	
 	 
-	public BirthdaysHelper getBirthdaysHelper(){
-		if (birthdaysHelper == null) {
-			birthdaysHelper = new BirthdaysHelper(this);
-		}
-		
-		return birthdaysHelper;
-	}
+
+
 	
 	public ContactsHelper getContactsHelper(){
 		if (contactsHelper == null) {

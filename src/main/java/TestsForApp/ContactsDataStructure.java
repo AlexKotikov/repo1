@@ -1,7 +1,6 @@
 package TestsForApp;
 
-import org.openqa.selenium.By;
-import com.example.fw.ApplicationManager;
+ 
 
 public class ContactsDataStructure {
 	public String first;

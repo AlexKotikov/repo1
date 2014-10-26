@@ -5,9 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import TestsForApp.ContactsDataStructure;
 
 
 
@@ -57,10 +56,14 @@ public String closeAlertAndGetItsText() {
   }
 
 protected void type(By locator, String text) {
-	if (text != null){
-	driver.findElement(locator).clear();
-	driver.findElement(locator).sendKeys(text);
-	}
+	if (text == null || text == "") return;
+	WebElement element = driver.findElement(locator);
+   element.clear();
+    element.sendKeys(text);
+		
+	//if (text != null){
+	//driver.findElement(locator).clear();
+	//driver.findElement(locator).sendKeys(text);	
 }
 
 protected void click(By name1) {
@@ -86,9 +89,7 @@ public void updateForm() {
 
 	click(By.name("update"));
 }
-public void deleteForm() {
-	click (By.xpath("//form[@action=\"delete.php\"]/input[@type=\"submit\"]"));	
-}
+
 
 
 public void modifiyForm() {
@@ -96,7 +97,18 @@ public void modifiyForm() {
 	click(By.name("modifiy"));
 }
 
+// Можно много полезных функций для себя обернуть. Главное не светить driver снаружи базового класса.
+protected int countElements(By by) {
+    return driver.findElements(by).size();
+}
 
+protected String getText(By by) {
+    return driver.findElement(by).getText();
+}
+
+protected String getCurrentUrl() {
+    return driver.getCurrentUrl();
+}
  
 
 }

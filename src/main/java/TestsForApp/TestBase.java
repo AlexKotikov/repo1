@@ -1,17 +1,12 @@
 package TestsForApp;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-
 import com.example.fw.ApplicationManager;
 
 public class TestBase {
 
-	public ApplicationManager app;
+	protected  ApplicationManager app;
 	
 	
 	@BeforeTest
@@ -22,8 +17,6 @@ public class TestBase {
 	@AfterTest
 	public void tearDown() throws Exception {
 		app.stop();
-		
-	   
 	  }
 
 }

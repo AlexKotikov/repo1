@@ -1,7 +1,7 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
+ 
 
 import TestsForApp.ContactsDataStructure;
 
@@ -12,9 +12,7 @@ public class ContactsHelper extends HelperBase {
 		
 	}
 
-	public void sendDataToContacts( ContactsDataStructure data) {
-		
-		
+	public void sendDataToContacts( ContactsDataStructure data) {		
 		type(By.name("firstname"), data.first);	
 		type(By.name("lastname"),data.last);
 		type(By.name("address"),data.address);
@@ -28,9 +26,7 @@ public class ContactsHelper extends HelperBase {
 		type(By.name("address2"),data.secondaryAddress);
 		type(By.name("phone2"),data.homepage);			 
 		selectByText(By.name("bday"), data.day);
-	    selectByText(By.name("bmonth"), data.month);
-		
-		 
+	    selectByText(By.name("bmonth"), data.month);	 
 	}
 
 	public void selectExistedContactEditLink(int index) {
@@ -43,6 +39,13 @@ public class ContactsHelper extends HelperBase {
 		
 	}
 
+	public void selectExistedContactEditLinkFromBirthdays (int index) {
+		click (By.xpath("//tr[@class=\"odd\"]["+ index +"]/td/a[starts-with(@href, \"edit.php\")]"));
+		
+	}
 	
+	public void deleteForm() {
+		click (By.xpath("//form[@action=\"delete.php\"]/input[@type=\"submit\"]"));	
+	}
 
 }
