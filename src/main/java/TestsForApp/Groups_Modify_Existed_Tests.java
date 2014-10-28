@@ -45,7 +45,11 @@ public class Groups_Modify_Existed_Tests extends TestBase {
     Collections.sort(oldList);
     assertEquals( newList, oldList);
 	
+<<<<<<< HEAD
 	//  
+=======
+	//
+>>>>>>> 6d63cb00e7c5ff6920bde148aea7c8f2c9b6cb89
 	}
 	
 }
