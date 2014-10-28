@@ -56,7 +56,7 @@ public String closeAlertAndGetItsText() {
   }
 
 protected void type(By locator, String text) {
-	if (text == null || text == "") return;
+	if (text == null ) return; //|| text == ""
 	WebElement element = driver.findElement(locator);
    element.clear();
     element.sendKeys(text);
