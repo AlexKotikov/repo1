@@ -19,7 +19,7 @@ public class TestBase {
 	@BeforeTest
 	public void setUp() throws Exception {
 	    app = new ApplicationManager();
-	  }
+	  } 
 
 	@AfterTest
 	public void tearDown() throws Exception {

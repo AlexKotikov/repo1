@@ -49,6 +49,6 @@ public class Gorups_Add_New_Group_With_Valid_Data_Tests extends TestBase{
    oldList.add(obj);
    Collections.sort(oldList);
    assertEquals( newList, oldList); 
-    
+     
   }
 }

@@ -48,5 +48,5 @@ public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
 		return  this.aname.toLowerCase().
 				compareTo(o.aname.toLowerCase());
 	}
-	
+	 
 }
