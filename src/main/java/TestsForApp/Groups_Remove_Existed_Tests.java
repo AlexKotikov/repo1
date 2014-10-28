@@ -35,5 +35,5 @@ public class Groups_Remove_Existed_Tests extends TestBase   {
 	   assertEquals( newList, oldList);
 		
 	}
-	 
+	 //
 }

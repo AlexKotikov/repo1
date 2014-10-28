@@ -42,15 +42,8 @@ public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
 			return false;
 		return true;
 	}
-<<<<<<< HEAD
-=======
-	
-	public int compareTo(GroupsDataStructure o) {
-		 
-		return  this.aname.toLowerCase().
-				compareTo(o.aname.toLowerCase());
-	}
->>>>>>> 6d63cb00e7c5ff6920bde148aea7c8f2c9b6cb89
+
+
 	
 	public int compareTo(GroupsDataStructure o) {
 		 
