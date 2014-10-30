@@ -2,23 +2,14 @@ package TestsForApp;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
  
 
 public class Gorups_Add_New_Group_With_Valid_Data_Tests extends TestBase{
-    
-	
-	
-	
-	@Test (dataProvider = "randomValidGroupGenerator")
+ @Test (dataProvider = "randomValidGroupGenerator")
   public void testSendDataToGroup(GroupsDataStructure obj) throws Exception {
     
 	app.getNavigationHelper().goToSiteHome();
@@ -37,7 +28,7 @@ public class Gorups_Add_New_Group_With_Valid_Data_Tests extends TestBase{
     obj.header =  "header1_listtest";  */
     
     app.getGroupHelper().fillInGroup(obj);
-    app.getGroupHelper(). submitGroupForm();
+    app.getGroupHelper().submitGroupForm();
     app.getGroupHelper().goToGroupsPage();
   
   // получить новый  

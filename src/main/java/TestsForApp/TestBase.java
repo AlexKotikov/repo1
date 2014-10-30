@@ -46,13 +46,38 @@ public class TestBase {
 		return list.iterator();
 	}
 	
+	@DataProvider
+	public Iterator<Object[]> randomValidContactsGenerator(){
+		List<Object[]> list = new ArrayList<Object[]>();
+		 
+		for (int i =0; i< 1; i++)
+		{
+		ContactsDataStructure con = new ContactsDataStructure();
+		con.first = generateRandomString();
+		con.last = generateRandomString();
+		con.email1 = generateRandomString();
+			
+			list.add (new Object[]{con});
+		}	
+		 	
+		return list.iterator();
+	}
+	
+	
+	protected int selectRandomContact(List<ContactsDataStructure> oldcon) {
+		Random digit = new Random(); 
+		   int a =digit.nextInt(oldcon.size());
+		return a;
+	}
+	
 	
 	public String generateRandomString (){
 		Random rnd = new Random();	
-		if (rnd.nextInt(3)==0)	 		
-			return  "";
+		//if (rnd.nextInt(0)==0)	 		
+		//	return  "";
 			 
-		        else     return  "randomtext" + rnd.nextInt(); 
+		    //    else   
+		        	return  "randomtext" + rnd.nextInt(); 
 			 
 	}	
 	

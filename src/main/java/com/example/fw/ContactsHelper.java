@@ -1,9 +1,14 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
  
 
 import TestsForApp.ContactsDataStructure;
+ 
 
 public class ContactsHelper extends HelperBase {
 
@@ -31,11 +36,11 @@ public class ContactsHelper extends HelperBase {
 
 	public void selectExistedContactEditLink(int index) {
 		//click (By.xpath("//tr[@name=\"entry\"]["+index+"]/td/input[@type=\"checkbox\"]"));
-		click (By.xpath("//tr[@name=\"entry\"]["+index +"]/td/a[starts-with(@href, \"edit.php\")]"));
+		click (By.xpath("//tr[@name=\"entry\"]["+(index +1)  +"]/td/a[starts-with(@href, \"edit.php\")]"));
 	}
 
 	public void selectExistedContactViewLink(int index) {
-		click (By.xpath("//tr[@name=\"entry\"]["+index +"]/td/a[starts-with(@href, \"view.php\")]"));
+		click (By.xpath("//tr[@name=\"entry\"]["+(index+1) +"]/td/a[starts-with(@href, \"view.php\")]"));
 		
 	}
 
@@ -47,5 +52,39 @@ public class ContactsHelper extends HelperBase {
 	public void deleteForm() {
 		click (By.xpath("//form[@action=\"delete.php\"]/input[@type=\"submit\"]"));	
 	}
+  
+	public List<ContactsDataStructure> GetContacts() {
+		List<ContactsDataStructure>  contacts = new ArrayList<ContactsDataStructure>();
+		
+		String trpath = "//tr[@name=\"entry\"]";
+		
+		
+		
+		if (  driver.findElements(By.xpath(trpath)).size() > 0) {
+		
+		List<WebElement> checkboxes = driver.findElements(By.xpath(trpath));
+		
+	 ///	for (WebElement webElement : checkboxes) {  
+		
+		  for (int i=1; i<checkboxes.size()+1;i++) {
+	    
+			ContactsDataStructure contact = new ContactsDataStructure();
+			
+			contact.first = driver.findElement(By.xpath(trpath+"["+i+ "]/td[2]")).getText();
+			contact.last  =  driver.findElement(By.xpath(trpath+"["+i+ "]/td[3]")).getText();
+			contact.email1 = driver.findElement(By.xpath(trpath+"["+i+ "]/td[4]")).getText();
+						
+			contacts.add(contact);
+	     	}
+		  
+		} else  throw new Error(" Контактов на форме нету!");
+			 
+        
+		return contacts;
+        
+		
+        
+	}  
 
+	
 }

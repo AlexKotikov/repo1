@@ -1,36 +1,35 @@
 package TestsForApp;
 
+import static org.testng.AssertJUnit.assertEquals;
+
+import java.util.Collections;
+import java.util.List;
+
+
 import org.testng.annotations.Test;
  
 
 
 public class Contacts_Add_New_Contact_Tests extends TestBase {
-  @Test
-  public void testCase1() throws Exception {
-    app.getNavigationHelper().goToSiteHome();
-    app.getContactsHelper().startToAddingOfNewContact();
-    
-    
-    ContactsDataStructure obj = new ContactsDataStructure();
-    obj.first	=   "First";
-    obj.last	=	"Last";
-    obj.address	=	"Address 123 /123";
-    obj.home	=	"Home"; 
-    obj.mobile	=	"Mobile"; 
-    obj.work	=	"Work"; 
-    obj.email1	=	"E-mail@E-mail.ru";
-    obj.email2	=	"E2-mail@E2-mail.ru";
-    obj.byear   =	"1988";
-    obj.address2	=	"Secondary";
-    obj.secondaryAddress	=	"SecondaryAddress";
-    obj.homepage =		"Homepage.ru";
-    obj.day = "17";
-    obj.month ="December";
+ 
+	 @Test  (dataProvider = "randomValidContactsGenerator")
+	  public void testCase2( ContactsDataStructure  obj) throws Exception {
+	    app.getNavigationHelper().goToSiteHome();
+
+	    List<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts() ;
+  
+	    app.getContactsHelper().startToAddingOfNewContact();
+	    app.getContactsHelper().sendDataToContacts(obj);
+	    app.getContactsHelper().sendContactsForm();
+	    app.getNavigationHelper().goToSiteHome();
+	    
+	    List<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
+        oldcon.add(obj.swapFirstAndLast());    
+	    Collections.sort(oldcon);
+        Collections.sort(newcon);
+	    
 	
-    
-    
-    app.getContactsHelper().sendDataToContacts(obj);
-    app.getContactsHelper().sendContactsForm();
-    app.getNavigationHelper().backToHomePage();
-  }
+         assertEquals( newcon, oldcon); 
+	    
+	 }
 }

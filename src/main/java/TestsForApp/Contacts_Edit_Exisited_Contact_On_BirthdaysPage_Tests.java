@@ -1,14 +1,19 @@
 package TestsForApp;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.annotations.Test;
 
-public class Contacts_Edit_Exisited_Contact_from_Birthdays__Page_Tests extends TestBase {
+public class Contacts_Edit_Exisited_Contact_On_BirthdaysPage_Tests extends TestBase {
 	
-	@Test
+	@Test  
     public void changeNameOfExistedContact() { 	
 	 
        app.getNavigationHelper().goToSiteHome();
        app.getNavigationHelper().goToBirthdaysPage();
+      
+ 
        app. getContactsHelper().selectExistedContactEditLinkFromBirthdays(1);
        
        
@@ -19,7 +24,8 @@ public class Contacts_Edit_Exisited_Contact_from_Birthdays__Page_Tests extends T
        app.getContactsHelper().sendDataToContacts(obj);
        app.getContactsHelper().updateForm();
        app.getNavigationHelper().goToBirthdaysPage();
-       
+      
+   
 	}
 	
 }
