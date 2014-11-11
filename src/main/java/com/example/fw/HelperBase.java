@@ -75,27 +75,9 @@ protected void selectByText(By locator, String seltext) {
 	}
 }
 
-public void sendContactsForm() {
-	 click(By.name("submit"));
-}
 
-public void startToAddingOfNewContact() {
-	click(By.linkText("add new"));
-	
+
  
-}
-
-public void updateForm() {
-
-	click(By.name("update"));
-}
-
-
-
-public void modifiyForm() {
-
-	click(By.name("modifiy"));
-}
 
 // Можно много полезных функций для себя обернуть. Главное не светить driver снаружи базового класса.
 protected int countElements(By by) {

@@ -1,45 +1,37 @@
 package TestsForApp;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
- 
+
+import com.example.utils.SortedListOf;
+
 
 public class Gorups_Add_New_Group_With_Valid_Data_Tests extends TestBase{
- @Test (dataProvider = "randomValidGroupGenerator")
-  public void testSendDataToGroup(GroupsDataStructure obj) throws Exception {
-    
-	app.getNavigationHelper().goToSiteHome();
-    app.getGroupHelper().goToGroupsPage();
+ 
+    @Test (dataProvider = "randomValidGroupGenerator")
+    public void testSendDataToGroup(GroupsDataStructure obj) throws Exception
+    {
+    	SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getGroups();
+   
+    	app.getGroupHelper().createNewGorup(obj);
+ 
+    	SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getGroups();  
   
-     // сохранить состояние   
-    List<GroupsDataStructure> oldList  = app.getGroupHelper().GetGroups();
-    
-    app.getGroupHelper().clickNewGroup();
-    
-    
-    // произвести действия  
-  /*    GroupsDataStructure obj = new GroupsDataStructure();
-    obj.aname = "group_listtest";
-    obj.footer =  "footer1_listtest";
-    obj.header =  "header1_listtest";  */
-    
-    app.getGroupHelper().fillInGroup(obj);
-    app.getGroupHelper().submitGroupForm();
-    app.getGroupHelper().goToGroupsPage();
+    	assertThat(newList, equalTo(oldList.withAdded(obj)));
   
-  // получить новый  
-    List<GroupsDataStructure> newList  = app.getGroupHelper().GetGroups();
-    
-  // сравнить все 
-   //assertEquals( newList.size(), oldList.size()+1);
+    	//---------------------------
+    		System.out.println("---New List---"); 
+    		for(GroupsDataStructure a:  newList) {System.out.println(a);}
   
-   oldList.add(obj);
-   Collections.sort(oldList);
-   assertEquals( newList, oldList); 
+    
+  
+    
+    
+   
+    
+    
      
   }
 }

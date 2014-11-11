@@ -15,10 +15,7 @@ public class ApplicationManager {
 	private GroupHelper  groupHelper;
 	private ContactsHelper  contactsHelper;
 	
-	 
-
-
-	
+ 
 	public ContactsHelper getContactsHelper(){
 		if (contactsHelper == null) {
 			contactsHelper = new ContactsHelper(this);
@@ -32,10 +29,10 @@ public class ApplicationManager {
 			groupHelper = new GroupHelper(this);
 		}
 		return groupHelper;
-	}
+	} 
 	
-	
-	public NavigationHelper getNavigationHelper(){
+	  // ленивая инициализация
+	public NavigationHelper navigateTo(){
 		if (navigationHelper == null) {
 			navigationHelper =  new NavigationHelper(this);
 		}
@@ -47,13 +44,16 @@ public class ApplicationManager {
 	public ApplicationManager() {
 		driver = new FirefoxDriver();
 	    baseUrl = "http://mysite/index.php";
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);		
+	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get(baseUrl); 
 	}
 	
 	
 	public void stop() {
 		 driver.quit();
 	}
+
+	
 	
 	
 }

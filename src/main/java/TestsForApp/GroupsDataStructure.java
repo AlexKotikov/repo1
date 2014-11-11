@@ -1,15 +1,28 @@
 package TestsForApp;
 
 public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
-	public String aname;
-	public String header;
-	public String footer;
+
+	private String aname;
+	private String header;
+	private String footer;
 
 	public GroupsDataStructure(String aname, String header, String footer) {
 		this.aname = aname;
 		this.header = header;
 		this.footer = footer;
 	}
+	
+	public String getName() {
+		return aname;
+	}
+	public String getHeader() {
+		return header;
+	}
+	public String getFooter() {
+		return footer;
+	}
+	
+	
 	public GroupsDataStructure() {
 		 
 	}
@@ -43,12 +56,23 @@ public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
 		return true;
 	}
 
-
-	
+	public GroupsDataStructure withName(String aname) {	  
+		this.aname = aname;
+		return this;
+	}
 	public int compareTo(GroupsDataStructure o) {
 		 
 		return this.aname.toLowerCase().
 				compareTo(o.aname.toLowerCase());
+	}
+	public GroupsDataStructure withHeader(String header) {
+		this.header = header;
+		return this;
+	}
+	public GroupsDataStructure withFooter(String Footer) {
+ 
+		this.footer = Footer;
+		return this;
 	}
 	 
 }

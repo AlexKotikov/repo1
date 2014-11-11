@@ -1,0 +1,10 @@
+pom.xml
+*.class
+.classpath
+.settings/
+target/
+test-output/
+*~
+.project
+
+

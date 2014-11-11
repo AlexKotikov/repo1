@@ -1,7 +1,6 @@
 package TestsForApp;
 
-import java.util.Collections;
-import java.util.List;
+import static com.example.fw.ContactsHelper.MODIFICATION;
 
 import org.testng.annotations.Test;
 
@@ -10,20 +9,22 @@ public class Contacts_Edit_Exisited_Contact_On_BirthdaysPage_Tests extends TestB
 	@Test  
     public void changeNameOfExistedContact() { 	
 	 
-       app.getNavigationHelper().goToSiteHome();
-       app.getNavigationHelper().goToBirthdaysPage();
+       app.navigateTo().homePage();
+       app.navigateTo().goToBirthdaysPage();
       
  
        app. getContactsHelper().selectExistedContactEditLinkFromBirthdays(1);
        
+       app.getContactsHelper().sendDataToContacts(
+         
+       new ContactsDataStructure() 
+          .withFirstName("Petya")
+          .withSecondName("Sviridov")
+       ,   MODIFICATION);
        
-       ContactsDataStructure obj = new ContactsDataStructure();
-       obj.first	=   "Vasya";
-       obj.last = "Selenium-birthdays2222";
-      
-       app.getContactsHelper().sendDataToContacts(obj);
+       
        app.getContactsHelper().updateForm();
-       app.getNavigationHelper().goToBirthdaysPage();
+       app.navigateTo().goToBirthdaysPage();
       
    
 	}

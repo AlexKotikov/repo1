@@ -1,39 +1,38 @@
 package TestsForApp;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
+
 
 public class Groups_Remove_Existed_Tests extends TestBase   {
    
 	@Test
 	public void deleteSomeGroup(){
-		app.getNavigationHelper().goToSiteHome();
-		app.getGroupHelper().goToGroupsPage();
+	 
 		
-		   // сохранить состояние   
-	    List<GroupsDataStructure> oldList  = app.getGroupHelper().GetGroups();
+		
+		 // сохранить состояние   
+		SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getGroups();
 	    
 		Random  rnd = new Random();
 		int index = rnd.nextInt(oldList.size()-1);
 		
-		app.getGroupHelper().deleteGroup(index);
-		app.getGroupHelper().goToGroupsPage();
-		
+		app.getGroupHelper()
+		   .deleteGroup(index) ;
 		 // получить новый  
-	    List<GroupsDataStructure> newList  = app.getGroupHelper().GetGroups();
-	    
-	  // сравнить все 
-	   //assertEquals( newList.size(), oldList.size()+1);
-	  
-	   oldList.remove(index);
-	   Collections.sort(oldList);
-	   assertEquals( newList, oldList);
-		
+		SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getGroups();
+	     // сравнить все 
+	     //assertEquals( newList.size(), oldList.size()+1);
+ 
+	   assertThat(newList, equalTo(oldList.without(index)));
+	   System.out.println("---New List---"); 
+	    for(GroupsDataStructure a:  newList) {System.out.println(a);}
 	}
-	 //
+	 
 }

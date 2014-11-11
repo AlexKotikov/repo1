@@ -13,12 +13,35 @@ public class NavigationHelper extends HelperBase {
 		 click(By.linkText("home"));
 	}
 
-	public void goToSiteHome() {
-		driver.get(manager.baseUrl );//+ "/group.php"
+	public void homePage() {
+		
+		if (!onHomePage())
+		click(By.linkText("home"));
 		
 	}
+	private boolean onHomePage() {
+		return (driver.findElements(By.id("maintable")).size() >0);
+	}
+
 	public void goToBirthdaysPage() {
 		 click(By.linkText("next birthdays"));
 		 
 	}
+	
+	 public void goToGroupsPage() {
+		 
+		  if (onGroupsPage())
+		 return ;		 	 
+		 // переход на страницу с группами
+			click(By.linkText("groups"));
+			 
+		}
+
+	private boolean onGroupsPage() { 
+		if (driver.getCurrentUrl().contains("group.php")
+            &&  driver.findElements(By.name("new")).size() >0
+            )
+			return true; else return false;
+	}
+	
 }

@@ -5,28 +5,32 @@ import static org.testng.AssertJUnit.assertEquals;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
 
 public class Contacts_Delete_Exisited_Contact_Tests extends TestBase {
 	
 	@Test
     public void changeNameOfExistedContact() { 	
 	 
-       app.getNavigationHelper().goToSiteHome();
+	   SortedListOf<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts() ;
        
-       List<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts() ;
+	   int a  =  app.getContactsHelper().selectRandomContact(oldcon); 
+	   
+	   		     app.getContactsHelper().deleteExistedContact(a);
        
-       int a  =  selectRandomContact(oldcon);
-       
-       app.getContactsHelper().selectExistedContactEditLink(a);
-       app.getContactsHelper().deleteForm();
-       app.getNavigationHelper().backToHomePage();
-       List<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
-       
-       oldcon.remove(a);
-       Collections.sort(oldcon);
-       Collections.sort(newcon);
-       assertEquals( newcon, oldcon); 
+       SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
+      
+       System.out.println("---New List---"); 
+	   for(ContactsDataStructure as:  newcon) {System.out.println(as);}
+   
+       assertThat(newcon, equalTo(oldcon.without(a))); 
+
 	}
+
+	
 	
 }
