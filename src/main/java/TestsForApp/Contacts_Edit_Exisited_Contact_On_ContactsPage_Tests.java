@@ -20,7 +20,7 @@ public class Contacts_Edit_Exisited_Contact_On_ContactsPage_Tests extends TestBa
 	  
        System.out.println("---New List---"); 
 	   for(ContactsDataStructure as:  newcon) {System.out.println(as);} 
-       
+      
 		assertThat(newcon  ,
 				equalTo(oldcon.without(a).withAdded(obj.swapFirstAndLast())));  
 	}

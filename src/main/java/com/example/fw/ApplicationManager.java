@@ -39,7 +39,7 @@ public class ApplicationManager {
 		return navigationHelper; 
 	}
 	
- 
+	
 	
 	public ApplicationManager() {
 		driver = new FirefoxDriver();

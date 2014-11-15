@@ -13,7 +13,7 @@ import com.example.utils.SortedListOf;
 
 public class Contacts_Add_New_Contact_Tests extends TestBase {
  
-	 //@Test  (dataProvider = "randomValidContactsGenerator")
+	  @Test  (dataProvider = "randomValidContactsGenerator")
 	  public void testCase1( ContactsDataStructure  obj) throws Exception 
 	  {
 		SortedListOf<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts() ;
@@ -30,7 +30,7 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 
 	
 	 
-	@Test
+	//@Test
 	   public void testCase2() throws Exception {
 	    		 
 	    
@@ -63,17 +63,9 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 	     
 	     SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts();  
    		
-	     System.out.println("---New List---"); 
- 		 for(ContactsDataStructure a:  newcon) {System.out.println(a);}
- 		
- 		
+	    // System.out.println("---New List---"); 
+ 		// for(ContactsDataStructure a:  newcon) {System.out.println(a);}
+ 		 		
 	     assertThat(newcon, equalTo(oldSorted.withAdded(validdata.swapFirstAndLast()))); 
-	     
-	     
-	     
-	     
-	     
 	   }
-	 
-	 
 }

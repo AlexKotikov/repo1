@@ -44,9 +44,9 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	
     //Этот метод определяет как сортировать все что находится в коллекции.
 	public int compareTo(ContactsDataStructure o) {
-	
-		return  this.first .compareTo(o.first) ;
-		
+	    
+		return  this.first.compareTo(o.first) ;
+		 
 		
 		
 }
@@ -54,7 +54,7 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	@Override
 	public String toString() {
 		return "ContactsDataStructure [first=" + first + ", last=" + last
-				+ ", address=" + address + "  email1=" + email1 +  "]";
+				+ ", address=" + address + "  email1=" + email1 +   "  Mobile=" + mobile + "]";
 	}
 
 	@Override
@@ -76,11 +76,11 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 		if (getClass() != obj.getClass())
 			return false;
 		ContactsDataStructure other = (ContactsDataStructure) obj;
-		if (email1 == null) {
-			if (other.email1 != null)
-				return false;
-		} else if (!email1.equals(other.email1))
-			return false;
+	//	if (email1 == null) {
+	//	if (other.email1 != null)
+	//	return false;
+	//	} else if (!email1.equals(other.email1))
+	//	return false;
 		if (first == null) {
 			if (other.first != null)
 				return false;
@@ -247,6 +247,11 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 
 	public void setEmail1(String email1) {
 		this.email1 = email1;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile  = mobile ;
+		
 	}
 	
 	

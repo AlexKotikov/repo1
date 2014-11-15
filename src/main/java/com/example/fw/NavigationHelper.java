@@ -1,6 +1,8 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
+ 
+
 
 public class NavigationHelper extends HelperBase {
 
@@ -16,9 +18,14 @@ public class NavigationHelper extends HelperBase {
 	public void homePage() {
 		
 		if (!onHomePage())
-		click(By.linkText("home"));
-		
+		//click(By.linkText("home"));
+		driver.get("http://mysite/index.php");
 	}
+	
+
+	
+	 
+	
 	private boolean onHomePage() {
 		return (driver.findElements(By.id("maintable")).size() >0);
 	}

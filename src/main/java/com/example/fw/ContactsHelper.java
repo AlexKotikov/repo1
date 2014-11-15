@@ -4,8 +4,11 @@ import static com.example.fw.ContactsHelper.CREATION;
 import static com.example.fw.ContactsHelper.MODIFICATION;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -75,9 +78,6 @@ public class ContactsHelper extends HelperBase {
 	}
 	
 	public void deleteExistedContact(int a) {
-		  
-		   
-	   
 	   selectExistedContactEditLink(a);
 	   deleteForm();
 	   returnOnContactsPage() ;
@@ -131,25 +131,23 @@ public class ContactsHelper extends HelperBase {
 	
 	
 	private static SortedListOf<ContactsDataStructure>  ConCache = null;
-	
-	
-	public SortedListOf<ContactsDataStructure> GetContacts() {
-		
-		if (ConCache == null ){
+		public SortedListOf<ContactsDataStructure> GetContacts() {
+			if (ConCache == null ){
 			return letsBuildCache() ;
-		}
+				}
 		
-		return ConCache;
+			return ConCache;
 		}
 		
 		public SortedListOf<ContactsDataStructure> letsBuildCache() {
-		//SortedListOf<ContactsDataStructure>  contacts = new SortedListOf<ContactsDataStructure>();
-		 
+		
+		 manager.navigateTo().homePage();
+		//returnOnContactsPage();
 		String trpath = "//tr[@name=\"entry\"]";
 
 		List<WebElement> checkboxes = driver.findElements(By.xpath(trpath));
 		 
-		SortedListOf<ContactsDataStructure> ff =  new SortedListOf<ContactsDataStructure>(); 
+		SortedListOf<ContactsDataStructure> contacts =  new SortedListOf<ContactsDataStructure>(); 
 
 		  for (int i=1; i<checkboxes.size()+1;i++) {
 	    
@@ -158,14 +156,52 @@ public class ContactsHelper extends HelperBase {
 			contact.setFirst(driver.findElement(By.xpath(trpath+"["+i+ "]/td[2]")).getText());
 			contact.setLast(driver.findElement(By.xpath(trpath+"["+i+ "]/td[3]")).getText());
 			contact.setEmail1(driver.findElement(By.xpath(trpath+"["+i+ "]/td[4]")).getText());	
-			ff.add(contact);
+			contact.setMobile(driver.findElement(By.xpath(trpath+"["+i+ "]/td[5]")).getText());	
+			
+			contacts.add(contact);
 	     	}
 		  
-		  ConCache = ff;
+		  ConCache = contacts;
 		  
 		  return ConCache;
 	}
 
+		public SortedListOf<ContactsDataStructure> getContactsFromPhones() {
+			 goToPhonesPage();				
+			 
+			 SortedListOf<ContactsDataStructure> phoneslist =  new SortedListOf<ContactsDataStructure>(); 
+			  
+	         String xpathOfTableTR ="//table[@id=\"view\"]/tbody/tr";
+			 String phone,first,last, email1,infofromcell;
+			  last ="";
+			 List<WebElement> TRs = driver.findElements(By.xpath(xpathOfTableTR));
+			 
+			 for (int i=1 ; i<=TRs.size(); i++)
+				 for (int i2=1 ; i2 <= 3; i2++) {
+					 	
+					 ContactsDataStructure contact = new ContactsDataStructure();
+	 
+					 infofromcell = driver.findElement(By.xpath(xpathOfTableTR+"["+i+"]/td["+i2+"]")).getText();
+					 
+					 if (infofromcell.indexOf(":") != -1)
+					 {
+						   last= infofromcell.substring(0, infofromcell.indexOf(" "));
+						   first= infofromcell.substring(infofromcell.indexOf(" ")+1, infofromcell.indexOf(":"));
+					      
+					      contact.setFirst(first);  
+				  	      contact.setLast(last);
+				  	      contact.setMobile(parsePhonesList(infofromcell));
+				  	      //System.out.println("F:"+first + " L:" + last + "P:" + parsePhonesList(infofromcell));
+					      
+					      phoneslist.add(contact);
+					 }
+ 
+				 }
+			 //System.out.println("---end---");
+				return phoneslist ;
+			}	
+		
+		
 	public ContactsHelper returnOnContactsPage() {
 		click(By.linkText("home"));
 		return this;
@@ -178,4 +214,67 @@ public class ContactsHelper extends HelperBase {
 		ConCache = null;
 		return this;
 	}
+
+	public boolean regxmatcher(SortedListOf<ContactsDataStructure>  phones_list) {
+
+		Pattern p = Pattern.compile("^[\\+]*\\d+(\\s)*(\\()*\\d*(\\))*[\\s]*(\\d|\\s)*(-|\\s)*(\\d+)*(-|\\s)*(\\d+)*$");
+ 
+		 for (ContactsDataStructure a: phones_list) {     
+			 
+			 
+			 Matcher m = p.matcher(a.getMobile());
+			 
+			 if(m.matches()) {
+				  //  System.out.println("\"" + a + "\" - OK");
+				}
+				else {
+				    System.out.println("\"" + a.getMobile()+ "\" - this value doesn't match the pattern: \n" + p +"\n");
+				    return false;
+					}  
+		 }
+		 
+		// Iterator<String> iter = phones_list.iterator();  
+		 
+		// while (iter.hasNext()) {
+		    	 
+		    //	Matcher m = p.matcher( iter.next() );
+				
+		    //	if(m.matches()) {
+			//	    System.out.println("\"" + iter.next() + "\" - OK");
+			//	}
+			//	else {
+				//    System.out.println("\"" + iter.next() + "\" - ERR");
+				//	}	
+		    	//System.out.println();
+		  // }
+    return  true; 
+	}
+
+	private  String  parsePhonesList(String a   ) {
+    
+		String offset =	  "M: " ;
+		
+	//String[] myaso = a.split(System.getProperty("line.separator")) ;
+		    
+			if (a.indexOf(offset) > 0) {  
+			      if (a.indexOf("W: ") > 0)
+				    a = a.substring(a.indexOf(offset)+offset.length(), a.indexOf("W: ") );
+			      else  
+			    	  a = a.substring(a.indexOf(offset)+offset.length());   
+		     return a.trim();
+			}  else 
+					return "";
+	}
+
+	
+
+	private  ContactsHelper goToPhonesPage() {
+		click(By.linkText("print phones"));
+		return this;
+	}
+	 
+
+ 
+	
+	
 }

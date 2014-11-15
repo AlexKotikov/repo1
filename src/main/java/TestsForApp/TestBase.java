@@ -52,7 +52,7 @@ public class TestBase {
 		 
 		for (int i =0; i< 1; i++)
 		{
-		ContactsDataStructure con = new ContactsDataStructure()
+		ContactsDataStructure  con = new ContactsDataStructure()
 		
 		.withFirstName(generateRandomString())
 		.withSecondName(generateRandomString())

@@ -22,8 +22,8 @@ public class Gorups_Add_New_Group_With_Valid_Data_Tests extends TestBase{
     	assertThat(newList, equalTo(oldList.withAdded(obj)));
   
     	//---------------------------
-    		System.out.println("---New List---"); 
-    		for(GroupsDataStructure a:  newList) {System.out.println(a);}
+    	System.out.println("---New List---"); 
+    	for(GroupsDataStructure a:  newList) {System.out.println(a);}
   
     
   
