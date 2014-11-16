@@ -1,17 +1,10 @@
 package TestsForApp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import org.testng.annotations.Test;
-import static org.junit.Assert.assertThat;
-import com.example.utils.SortedListOf;
-import com.google.common.collect.Lists;
-
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is; 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.testng.annotations.Test;
+import com.example.utils.SortedListOf;
 
 
 public class Contacts_check_Phones extends TestBase {
@@ -28,7 +21,7 @@ public class Contacts_check_Phones extends TestBase {
      @Test  
      public void testRegExpOfPhones() throws Exception 
 	{   
-		app.navigateTo().homePage();
+		
     	SortedListOf<ContactsDataStructure>  phones_list = app.getContactsHelper().getContactsFromPhones();
 	    assertThat( app.getContactsHelper().regxmatcher(phones_list), is(true));
 	}  

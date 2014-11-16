@@ -15,6 +15,9 @@ public class ApplicationManager {
 	private GroupHelper  groupHelper;
 	private ContactsHelper  contactsHelper;
 	
+	protected String returnBaseURL(){
+	   return this.baseUrl;
+	}
  
 	public ContactsHelper getContactsHelper(){
 		if (contactsHelper == null) {

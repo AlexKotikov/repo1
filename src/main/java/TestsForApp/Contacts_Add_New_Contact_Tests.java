@@ -1,13 +1,9 @@
 package TestsForApp;
 
-import static com.example.fw.ContactsHelper.CREATION;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.testng.AssertJUnit.assertEquals;
-import java.util.Collections;
-
 import org.testng.annotations.Test;
-
 import com.example.utils.SortedListOf;
  
 
@@ -30,12 +26,10 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 
 	
 	 
-	//@Test
+	 @Test
 	   public void testCase2() throws Exception {
 	    		 
-	    
-	      
-	     ContactsDataStructure  validdata =  new ContactsDataStructure()
+      ContactsDataStructure  validdata =  new ContactsDataStructure()
 	      .withFirstName("Вася") 
 	      .withSecondName("Петров") 
 	      .withAddress("ул Ленина 12 13/1")	 
@@ -49,22 +43,19 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 	      .withSecondaryAddress("SecondaryAddress") 
 	      .withHomepage("Homepage.ru")  
 	      .withDay("17")  
-	      .withMonth ("December")  
+	      .withMonth ("December") 
+	      .withGroup ("1") 
            ;
 	     
-	     app.navigateTo().backToHomePage();
+	    
 	     SortedListOf<ContactsDataStructure> oldSorted = app.getContactsHelper().GetContacts();
 	     
 	     app.getContactsHelper().startToAddingOfNewContact();
 	      
-	     app.getContactsHelper().sendDataToContacts( validdata  ,true);
+	     app.getContactsHelper().sendDataToContacts( validdata  , app.getContactsHelper().CREATION);
 	     app.getContactsHelper().sendContactsForm();
-	     app.navigateTo().backToHomePage();
-	     
+	        
 	     SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts();  
-   		
-	    // System.out.println("---New List---"); 
- 		// for(ContactsDataStructure a:  newcon) {System.out.println(a);}
  		 		
 	     assertThat(newcon, equalTo(oldSorted.withAdded(validdata.swapFirstAndLast()))); 
 	   }

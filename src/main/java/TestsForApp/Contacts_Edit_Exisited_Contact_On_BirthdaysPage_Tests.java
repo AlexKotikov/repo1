@@ -1,6 +1,6 @@
 package TestsForApp;
 
-import static com.example.fw.ContactsHelper.MODIFICATION;
+
 
 import org.testng.annotations.Test;
 
@@ -20,7 +20,7 @@ public class Contacts_Edit_Exisited_Contact_On_BirthdaysPage_Tests extends TestB
        new ContactsDataStructure() 
           .withFirstName("Petya")
           .withSecondName("Sviridov")
-       ,   MODIFICATION);
+       ,   app.getContactsHelper().MODIFICATION);
        
        
        app.getContactsHelper().updateForm();

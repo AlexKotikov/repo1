@@ -17,6 +17,7 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	private String homepage;
 	private String day;
 	private String month;
+	private String group;
 	
 	public ContactsDataStructure(String first, String last,
 			String address, String home, String mobile, String work,
@@ -35,7 +36,7 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 		this.secondaryAddress = secondaryAddress;
 		this.homepage = homepage;
 		this.day = day;
-		this. month = month; 
+		this.month = month; 
 		
 	}
 	
@@ -46,9 +47,6 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	public int compareTo(ContactsDataStructure o) {
 	    
 		return  this.first.compareTo(o.first) ;
-		 
-		
-		
 }
 
 	@Override
@@ -180,6 +178,11 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
         this.month = string;
 		return this;
 	}
+	
+	public ContactsDataStructure withGroup(String group) {
+		 this.group = group;
+		return this;
+	}
 
 	public String getFirst() {
 		return first;
@@ -232,7 +235,11 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	public String getDay() {
 		return day;
 	}
-
+	
+	public String getGroup() {
+		return group;
+	}
+	
 	public String getMonth() {
 		return month;
 	}
@@ -252,13 +259,8 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	public void setMobile(String mobile) {
 		this.mobile  = mobile ;
 		
-	}
-	
-	
-	
-	
-	
-	}
+	}	
+}
 
 	
 	

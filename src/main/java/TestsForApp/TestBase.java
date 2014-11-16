@@ -14,8 +14,7 @@ import com.example.fw.ApplicationManager;
 public class TestBase {
 
 	protected  ApplicationManager app;
-	private String generRandomString;
-	private String aname;
+
 	
 	
 	@BeforeTest

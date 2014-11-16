@@ -19,7 +19,7 @@ public class NavigationHelper extends HelperBase {
 		
 		if (!onHomePage())
 		//click(By.linkText("home"));
-		driver.get("http://mysite/index.php");
+		 goBaseUrl();
 	}
 	
 

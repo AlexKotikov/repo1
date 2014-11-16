@@ -18,8 +18,8 @@ public class Contacts_Edit_Exisited_Contact_On_ContactsPage_Tests extends TestBa
        
        SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
 	  
-       System.out.println("---New List---"); 
-	   for(ContactsDataStructure as:  newcon) {System.out.println(as);} 
+       //System.out.println("---New List---"); 
+	   //for(ContactsDataStructure as:  newcon) {System.out.println(as);} 
       
 		assertThat(newcon  ,
 				equalTo(oldcon.without(a).withAdded(obj.swapFirstAndLast())));  

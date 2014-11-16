@@ -7,7 +7,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
+ 
 
 
 public abstract class HelperBase {
@@ -42,29 +42,26 @@ public boolean isAlertPresent() {
 
 public String closeAlertAndGetItsText() {
     try {
-      Alert alert =  driver.switchTo().alert();
-      String alertText = alert.getText();
-      if ( acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
+    	Alert alert =  driver.switchTo().alert();
+    	String alertText = alert.getText();
+    		if ( acceptNextAlert) {
+    				alert.accept();
+    			} else {
+    					alert.dismiss();
+    					}
+    return alertText;
     } finally {
        acceptNextAlert = true;
     }
   }
 
-protected void type(By locator, String text) {
-	if (text == null ) return; //|| text == ""
-	WebElement element = driver.findElement(locator);
-   element.clear();
-    element.sendKeys(text);
-		
-	//if (text != null){
-	//driver.findElement(locator).clear();
-	//driver.findElement(locator).sendKeys(text);	
-}
+protected void type(By locator, String text)
+	{
+		if (text == null ) return; //|| text == ""
+		WebElement element = driver.findElement(locator);
+	    element.clear();
+	    element.sendKeys(text);
+	}
 
 protected void click(By name1) {
 	driver.findElement(name1).click();
@@ -75,9 +72,6 @@ protected void selectByText(By locator, String seltext) {
 	}
 }
 
-
-
- 
 
 // Можно много полезных функций для себя обернуть. Главное не светить driver снаружи базового класса.
 protected int countElements(By by) {
@@ -92,5 +86,8 @@ protected String getCurrentUrl() {
     return driver.getCurrentUrl();
 }
  
+protected void goBaseUrl() {
+     driver.get(manager.returnBaseURL());
+}
 
 }
