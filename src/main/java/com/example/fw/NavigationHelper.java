@@ -1,5 +1,7 @@
 package com.example.fw;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
  
 
@@ -27,7 +29,16 @@ public class NavigationHelper extends HelperBase {
 	 
 	
 	private boolean onHomePage() {
-		return (driver.findElements(By.id("maintable")).size() >0);
+		boolean var;
+		 driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		
+		 var = driver.findElements(By.id("maintable")).size() >0;
+		 
+		  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		return (var);
+		  
+		
 	}
 
 	public void goToBirthdaysPage() {

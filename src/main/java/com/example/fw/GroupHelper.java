@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import TestsForApp.GroupsDataStructure;
 
+import com.example.tests.GroupsDataStructure;
 import com.example.utils.SortedListOf;
 
 public class GroupHelper extends HelperBase{

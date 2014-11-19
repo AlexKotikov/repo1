@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertTrue;
 
-import TestsForApp.ContactsDataStructure;
-
+import com.example.tests.ContactsDataStructure;
 import com.example.utils.SortedListOf;
  
  
@@ -47,12 +47,18 @@ public class ContactsHelper extends HelperBase {
 	    if (formType == CREATION) {
 	       selectByText(By.name("new_group"), data.getGroup());   	
 	      } else {
-	    //  ensure that there is no such element;  	
+	     //ensure that there is no such element;  
+	     //сквозная проверка
+	      assertTrue(isElementNotPresent(By.name("new_group")));
 	    }
 	    
 	    return this;
 	}
 
+	
+	
+	
+	
 	public void modifyForm(ContactsDataStructure obj, int a) {
 		      
 		       selectExistedContactViewLink(a);
@@ -96,7 +102,8 @@ public class ContactsHelper extends HelperBase {
 	}
 	
 	public SortedListOf<ContactsDataStructure> letsBuildCache() {
-			 manager.navigateTo().homePage();
+			
+		    manager.navigateTo().homePage();
 			 
 			String trpath = "//tr[@name=\"entry\"]";
 		

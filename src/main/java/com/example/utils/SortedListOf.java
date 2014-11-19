@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import TestsForApp.GroupsDataStructure;
 
+import com.example.tests.GroupsDataStructure;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 
@@ -57,12 +57,12 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     newItems.list.add(item);
     Collections.sort(newItems.list);
     
-    System.out.println("---Old List---");    
-    Iterator<T> iter = newItems.iterator(); // coll - коллекция
-    while (iter.hasNext()) {
+    //System.out.println("---Old List---");    
+    //Iterator<T> iter = newItems.iterator(); // coll - коллекция
+    //while (iter.hasNext()) {
     // обрабатываем объект, возвращаемый методом 
-    	System.out.println(iter.next());
-    }
+    	//System.out.println(iter.next());
+    //}
     
     
     return newItems;
@@ -73,9 +73,9 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     newItems.list = Lists.newArrayList(this.list);
     newItems.list.remove(item);
     
-    System.out.println("---Old List---"); 
+    //System.out.println("---Old List---"); 
     Iterator<T>  iter = newItems.iterator();  
-    while (iter.hasNext()) { System.out.println(iter.next());     }
+    //while (iter.hasNext()) { System.out.println(iter.next());     }
     
     return newItems;
   }
@@ -84,9 +84,9 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     SortedListOf<T> newItems = new SortedListOf<T>();
     newItems.list = Lists.newArrayList(this.list);
     newItems.list.remove(index);
-    System.out.println("---Old List---"); 
+    //System.out.println("---Old List---"); 
     Iterator<T>  iter = newItems.iterator();  
-    while (iter.hasNext()) { System.out.println(iter.next());     }
+    //while (iter.hasNext()) { System.out.println(iter.next());     }
     return newItems;
   }
 

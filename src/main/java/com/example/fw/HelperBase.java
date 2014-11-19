@@ -1,5 +1,7 @@
 package com.example.fw;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -71,6 +73,15 @@ protected void selectByText(By locator, String seltext) {
 	new Select(driver.findElement(locator)).selectByVisibleText(seltext);
 	}
 }
+	//we want to be sure that element doesn't present on form.
+protected boolean isElementNotPresent(By locator) {
+	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	  
+	  boolean result = driver.findElements(locator).size() > 0;
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  return result;
+	}
+
 
 
 // Можно много полезных функций для себя обернуть. Главное не светить driver снаружи базового класса.
