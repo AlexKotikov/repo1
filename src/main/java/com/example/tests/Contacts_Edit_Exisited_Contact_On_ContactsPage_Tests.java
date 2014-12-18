@@ -10,18 +10,35 @@ public class Contacts_Edit_Exisited_Contact_On_ContactsPage_Tests extends TestBa
 	@Test (dataProvider = "randomValidContactsGenerator")
     public void changeNameOfExistedContact( ContactsDataStructure   obj)  { 	
 		
-	SortedListOf<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts();
-       
+	SortedListOf<ContactsDataStructure>  oldcon = //app.getContactsHelper().getUIContacts();
+			app.getModelHelper().getContacts();
+			
        int a = app.getContactsHelper().selectRandomContact(oldcon);
        
        app.getContactsHelper().modifyForm(obj, a);
        
-       SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
-	  
-       //System.out.println("---New List---"); 
-	   //for(ContactsDataStructure as:  newcon) {System.out.println(as);} 
+       SortedListOf<ContactsDataStructure>  newcon = //app.getContactsHelper().getUIContacts() ;
+    		   app.getModelHelper().getContacts();
+    		   
+    		   
+      // System.out.println("---New List---"); 
+	  // for(ContactsDataStructure as:  newcon) {System.out.println(as);} 
       
 		assertThat(newcon  ,
-				equalTo(oldcon.without(a).withAdded(obj.swapFirstAndLast())));  
+				equalTo(oldcon.without(a).withAdded(obj)));  
+		
+		 if (checking("ui")){
+	    	 newcon  = app.getContactsHelper().getUIContacts(); 
+	    		assertThat(newcon, 
+	    				equalTo(oldcon.without(a).withAdded(obj)));  
+	    		}
+	     
+	     if (checking("db")){
+	    	 newcon  = 
+	    			 new  SortedListOf<ContactsDataStructure>(app.GetHibernateHelper().listContacts());
+	    	 assertThat(newcon, 
+	    			 equalTo(oldcon.without(a).withAdded(obj)));  
+	     }
+		
 	}
 }

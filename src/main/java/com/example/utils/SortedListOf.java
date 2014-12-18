@@ -57,12 +57,14 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     newItems.list.add(item);
     Collections.sort(newItems.list);
     
-    //System.out.println("---Old List---");    
-    //Iterator<T> iter = newItems.iterator(); // coll - коллекция
-    //while (iter.hasNext()) {
+  /* 
+     System.out.println("---Old List---");    
+    Iterator<T> iter = newItems.iterator(); // coll - коллекция
+    while (iter.hasNext()) {
     // обрабатываем объект, возвращаемый методом 
-    	//System.out.println(iter.next());
-    //}
+    	System.out.println(iter.next());
+    }
+    */
     
     
     return newItems;

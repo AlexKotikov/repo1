@@ -12,7 +12,7 @@ public class Contacts_check_Phones extends TestBase {
 	@Test 
 	 public void testThatContactsMatchOn() throws Exception 
 		{   
-		   SortedListOf<ContactsDataStructure>  onMainPage = app.getContactsHelper().GetContacts();  
+		   SortedListOf<ContactsDataStructure>  onMainPage = app.getContactsHelper().getUIContacts();  
 		   SortedListOf<ContactsDataStructure>  onPhonesPage = app.getContactsHelper().getContactsFromPhones();
 		   assertThat(onMainPage, equalTo(onPhonesPage)); 
 		} 

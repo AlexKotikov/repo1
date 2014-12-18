@@ -39,16 +39,36 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 	 @Test  (dataProvider = "loadXML")
 	 public void testCase1( ContactsDataStructure  obj) throws Exception 
 	  {
-		SortedListOf<ContactsDataStructure>  oldcon = app.getContactsHelper().GetContacts() ;
-		
+		SortedListOf<ContactsDataStructure>  oldcon = //app.getContactsHelper().GetContacts() ;
+				new  SortedListOf<ContactsDataStructure>(app.getModelHelper().getContacts());
+				
+				
 		app.getContactsHelper().makeNewContcact(obj); 
 	       
-	    SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts() ;
-            
-	      		//System.out.println("---New List---"); 
-	    		//for(ContactsDataStructure a:  newcon) {System.out.println(a);}
-		
-        assertThat(newcon, equalTo(oldcon.withAdded(obj.swapFirstAndLast()))); 
+	    SortedListOf<ContactsDataStructure>  newcon = //app.getContactsHelper().GetContacts() ;
+            app.getModelHelper().getContacts();
+	    		
+	    		
+	   
+	      //	System.out.println("---New List---"); 
+	     //   for(ContactsDataStructure a:  newcon) {System.out.println(a);}   
+	    
+	     assertThat(newcon, equalTo(oldcon.withAdded(obj))); //.swapFirstAndLast()
+	    
+	     
+	     if (checking("ui")){
+	    	 newcon  = app.getContactsHelper().getUIContacts(); 
+	    		assertThat(newcon, equalTo(oldcon.withAdded(obj)));
+	    		}
+	     
+	     if (checking("db")){
+	    	 newcon  = new  SortedListOf<ContactsDataStructure>(app.GetHibernateHelper().listContacts());
+	    		assertThat(newcon, equalTo(oldcon.withAdded(obj)));
+	    		System.out.println("DB");
+	    		}
+	     
+	     
+	     
 	 }
 
 	
@@ -71,18 +91,17 @@ public class Contacts_Add_New_Contact_Tests extends TestBase {
 	      .withHomepage("Homepage.ru")  
 	      .withDay("17")  
 	      .withMonth ("December") 
-	      .withGroup ("1") 
-           ;
+	      .withGroup ("1");
 	     
 	    
-	     SortedListOf<ContactsDataStructure> oldSorted = app.getContactsHelper().GetContacts();
+	     SortedListOf<ContactsDataStructure> oldSorted = //app.getContactsHelper().GetContacts();
+	     new  SortedListOf<ContactsDataStructure>(app.GetHibernateHelper().listContacts());
 	     
 	     app.getContactsHelper().startToAddingOfNewContact();
-	      
-	     app.getContactsHelper().sendDataToContacts( validdata  , app.getContactsHelper().CREATION);
+	     app.getContactsHelper().sendDataToContacts(validdata,app.getContactsHelper().CREATION);
 	     app.getContactsHelper().sendContactsForm();
 	        
-	     SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().GetContacts();  
+	     SortedListOf<ContactsDataStructure>  newcon = app.getContactsHelper().getUIContacts();  
  		 		
 	     assertThat(newcon, equalTo(oldSorted.withAdded(validdata.swapFirstAndLast()))); 
 	   }

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.example.tests.GroupsDataStructure;
 import com.example.utils.SortedListOf;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends WebDriverBasedHelperBase{
 
 	public GroupHelper createNewGorup(GroupsDataStructure obj ) {
 		 
@@ -18,6 +18,7 @@ public class GroupHelper extends HelperBase{
 	            fillInGroup(obj);
 	            submitGroupForm();
 	            returntoGroupPage();
+	            manager.getModelHelper().addGroup(obj);
 	            rebuildCache();
 	    return this;
 	}
@@ -26,16 +27,13 @@ public class GroupHelper extends HelperBase{
 	
 	
 	
-	public SortedListOf<GroupsDataStructure> getGroups() {
+	public SortedListOf<GroupsDataStructure> getUIGroups() {
 		
 		if (cachedGroups == null) rebuildCache();
 	
 	return 	 cachedGroups;
 	}
 		
-	
-		
-	
 	private void rebuildCache() {
 		  cachedGroups = new SortedListOf<GroupsDataStructure>();
            manager.navigateTo().goToGroupsPage();
@@ -51,10 +49,6 @@ public class GroupHelper extends HelperBase{
 	}  
 		
 
-
-
-
-
 	public GroupHelper deleteGroup(int index) {
 		 
 		manager.navigateTo().goToGroupsPage();
@@ -62,6 +56,7 @@ public class GroupHelper extends HelperBase{
 		delete();
 		returntoGroupPage();
 		rebuildCache();
+		manager.getModelHelper().removeGroup(index);
 		return this;
 	}
 
@@ -77,6 +72,8 @@ public class GroupHelper extends HelperBase{
 	    groupUpdate();
 	    returntoGroupPage();
 	    rebuildCache();
+	    manager.getModelHelper().removeGroup(index). addGroup(obj);
+	    
 	    return this;
 }
 	

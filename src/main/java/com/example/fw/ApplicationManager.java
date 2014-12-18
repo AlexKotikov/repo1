@@ -17,13 +17,17 @@ import com.opera.core.systems.OperaDriver;
 
 public class ApplicationManager {
 
-	public  WebDriver driver;
-	public  String baseUrl;
-	
+	private  WebDriver driver;
+	private  String baseUrl;
+	private Properties  properts;
 
 	private NavigationHelper navigationHelper;
 	private GroupHelper  groupHelper;
 	private ContactsHelper  contactsHelper;
+	private HibernateHelper hibernatehelper;
+	
+	private ApplicationModel  model;
+	private Integer counter = 0;
 	
 	protected String returnBaseURL(){
 	   return this.baseUrl;
@@ -52,39 +56,66 @@ public class ApplicationManager {
 		return navigationHelper; 
 	}
 	
+	public HibernateHelper GetHibernateHelper(){
+		if (hibernatehelper == null) {
+			hibernatehelper =  new HibernateHelper(this);
+		}
+		return hibernatehelper; 
+	}
+	
 	
 	
 	public ApplicationManager(Properties prop) throws FileNotFoundException, IOException {
 		 
+		this.properts = prop;
 		
-		if (prop.getProperty("browser").equals("firefox"))
-			driver = new FirefoxDriver();
-		else 
-		if (prop.getProperty("browser").equals("opera"))
-			driver = new OperaDriver();
-		else
-		if (prop.getProperty("browser").equals("chrome"))
-			driver = new ChromeDriver();
-		else
-		if (prop.getProperty("browser").equals("ie"))
-			driver = new InternetExplorerDriver();
-		else 
-			throw new Error("unsupported browser");
+		model = new ApplicationModel();
+		model.setGroups(GetHibernateHelper().listGroups()) ;
+		model.setContacts(GetHibernateHelper().listContacts()) ;	 
 		
-		
-		
-		
-		baseUrl = prop.getProperty("baseurl");
-	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get(baseUrl); 
 	}
+	
+	public ApplicationModel getModelHelper(){
+		return this.model;
+		
+	}
+	
+	 
 	
 	
 	public void stop() {
 		 driver.quit();
 	}
 
+  public WebDriver getDriver() {
+		if (driver == null) {
+			
+			if (properts.getProperty("browser").equals("firefox"))
+				driver = new FirefoxDriver();
+			else 
+			if (properts.getProperty("browser").equals("opera"))
+				driver = new OperaDriver();
+			else
+			if (properts.getProperty("browser").equals("chrome"))
+				driver = new ChromeDriver();
+			else
+			if (properts.getProperty("browser").equals("ie"))
+				driver = new InternetExplorerDriver();
+			else 
+				throw new Error("unsupported browser");			
+		}
+		
+		baseUrl = properts.getProperty("baseurl");
+	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get(baseUrl); 
+		
+		
+		return this.driver ;
+	}
 
+  		public String getProperty(String key){
+  			return properts.getProperty(key);
+  		}
 	
 	
 }

@@ -21,13 +21,15 @@ public class ContactsGenerator {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to Contacts Data Generator"	);
 		
+		
+		
 		if (args.length == 3 ) { 
 		
 			int amount = Integer.parseInt(args[0]); 
 		     File file = new File(args[1]);
-		    //  if (file.exists()) {
-			//	System.out.println("File " + file + " already exists!");
-			//	return; }
+		      if (file.exists()) {
+			 	System.out.println("File " + file + " already exists!");
+			  	return; }
 		     
 		     
 			 if (args[2].equals("csv")) 

@@ -15,7 +15,7 @@ public class Groups_Modify_Existed_Tests extends TestBase {
     public void renamegroup(GroupsDataStructure obj) { 	
  
 	  // сохранить состояние   
-	SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getGroups();
+	SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getUIGroups();
     
 	Random  rnd = new Random();
 	int index = rnd.nextInt(oldList.size()-1);
@@ -23,7 +23,7 @@ public class Groups_Modify_Existed_Tests extends TestBase {
 	app.getGroupHelper().modifyGroup(index,obj);
 	
 	// получить новый  
-	SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getGroups();   
+	SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getUIGroups();   
     // сравнить все 
     //assertEquals( newList.size(), oldList.size()+1);
    

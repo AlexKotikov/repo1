@@ -18,7 +18,7 @@ public class Groups_Remove_Existed_Tests extends TestBase   {
 		
 		
 		 // сохранить состояние   
-		SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getGroups();
+		SortedListOf<GroupsDataStructure> oldList  = app.getGroupHelper().getUIGroups();
 	    
 		Random  rnd = new Random();
 		int index = rnd.nextInt(oldList.size()-1);
@@ -26,7 +26,7 @@ public class Groups_Remove_Existed_Tests extends TestBase   {
 		app.getGroupHelper()
 		   .deleteGroup(index) ;
 		 // получить новый  
-		SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getGroups();
+		SortedListOf<GroupsDataStructure> newList  = app.getGroupHelper().getUIGroups();
 	     // сравнить все 
 	     //assertEquals( newList.size(), oldList.size()+1);
  

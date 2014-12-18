@@ -1,7 +1,5 @@
 package com.example.tests;
 
- 
-
 public class ContactsDataStructure  implements Comparable<ContactsDataStructure> {
 	private String first;
 	private String last;
@@ -18,6 +16,8 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 	private String day;
 	private String month;
 	private String group;
+	private String id;
+	  
 	
 	public ContactsDataStructure(String first, String last,
 			String address, String home, String mobile, String work,
@@ -37,9 +37,11 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 		this.homepage = homepage;
 		this.day = day;
 		this.month = month; 
-		
+		 
 	}
 	
+	
+
 	public ContactsDataStructure() {}
 	
 	
@@ -49,12 +51,21 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 		return  this.first.compareTo(o.first) ;
 }
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "ContactsDataStructure [first=" + first + ", last=" + last
 				+ ", address=" + address + "  email1=" + email1 +   "  Mobile=" + mobile + "]";
+	}*/
+
+
+	@Override
+	public String toString() {
+		return "ContactsDataStructure [first=" + first + ", last=" + last
+				+ "]";
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		//final int prime = 31;
@@ -100,6 +111,59 @@ public class ContactsDataStructure  implements Comparable<ContactsDataStructure>
 		return this;
 	}
 
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setHome(String home) {
+		this.home = home;
+	}
+
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
+	public void setByear(String byear) {
+		this.byear = byear;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public void setSecondaryAddress(String secondaryAddress) {
+		this.secondaryAddress = secondaryAddress;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+	
 	public ContactsDataStructure withFirstName(String name) {		
 		this.first = name;
 		return this;

@@ -15,7 +15,7 @@ import com.example.utils.SortedListOf;
  
  
 
-public class ContactsHelper extends HelperBase {
+public class ContactsHelper extends WebDriverBasedHelperBase {
 
 	public static boolean CREATION = true;
 	public static boolean MODIFICATION = false;
@@ -49,7 +49,7 @@ public class ContactsHelper extends HelperBase {
 	      } else {
 	     //ensure that there is no such element;  
 	     //сквозная проверка
-	      assertTrue(isElementNotPresent(By.name("new_group")));
+	     // assertTrue(isElementNotPresent(By.name("new_group")));
 	    }
 	    
 	    return this;
@@ -64,6 +64,7 @@ public class ContactsHelper extends HelperBase {
 		       selectExistedContactViewLink(a);
 		       modifiyForm();
 		       sendDataToContacts(obj, MODIFICATION);
+		       manager.getModelHelper().removeContact(a).addContact(obj);
 		       updateForm();
 		       returnOnContactsPage() ;
 		     
@@ -74,15 +75,18 @@ public class ContactsHelper extends HelperBase {
 	public void makeNewContcact(ContactsDataStructure obj) {
 		  
 		
-	        startToAddingOfNewContact();
-	        sendDataToContacts(obj, CREATION) ;
-	        sendContactsForm();
+	        startToAddingOfNewContact();		 // click link add
+	        sendDataToContacts(obj, CREATION) ;  // fill in fields
+	        manager.getModelHelper().addContact(obj);
+	        
+	        sendContactsForm();         		// click submit
 	        returnOnContactsPage();
 	       
 	}
 	
 	public void deleteExistedContact(int a) {
 			selectExistedContactEditLink(a);
+			manager.getModelHelper().removeContact(a);
 			deleteForm();
 			returnOnContactsPage() ;
 }
@@ -94,7 +98,7 @@ public class ContactsHelper extends HelperBase {
 		return a;
 	}
 	
-	public SortedListOf<ContactsDataStructure> GetContacts() {
+	public SortedListOf<ContactsDataStructure> getUIContacts() {
 		if (ConCache == null ){
 		return letsBuildCache() ;
 			}
@@ -114,8 +118,8 @@ public class ContactsHelper extends HelperBase {
 			  for (int i=1; i<checkboxes.size()+1;i++) {
 		    
 				ContactsDataStructure contact = new ContactsDataStructure();
-				contact.setFirst(driver.findElement(By.xpath(trpath+"["+i+ "]/td[2]")).getText());
-				contact.setLast(driver.findElement(By.xpath(trpath+"["+i+ "]/td[3]")).getText());
+				contact.setFirst(driver.findElement(By.xpath(trpath+"["+i+ "]/td[3]")).getText());
+				contact.setLast(driver.findElement(By.xpath(trpath+"["+i+ "]/td[2]")).getText());
 				contact.setEmail1(driver.findElement(By.xpath(trpath+"["+i+ "]/td[4]")).getText());	
 				contact.setMobile(driver.findElement(By.xpath(trpath+"["+i+ "]/td[5]")).getText());	
 				

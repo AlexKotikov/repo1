@@ -5,12 +5,31 @@ public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
 	private String aname;
 	private String header;
 	private String footer;
+	private String id;
+	
+	
+	public String getAname() {
+		return aname;
+	}
 
-	public GroupsDataStructure(String aname, String header, String footer) {
+	public GroupsDataStructure(String aname, String header, String footer,  String id) {
 		this.aname = aname;
 		this.header = header;
 		this.footer = footer;
+		this.id = id;
 	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public GroupsDataStructure withId(String id) {
+		
+		this.id = id;
+		return this;
+		
+	}
+	
 	
 	public String getName() {
 		return aname;
@@ -23,6 +42,25 @@ public class GroupsDataStructure implements  Comparable<GroupsDataStructure> {
 	}
 	
 	
+	public GroupsDataStructure setAname(String aname) {
+		this.aname = aname;
+		return this;
+	}
+
+	public GroupsDataStructure setHeader(String header) {
+		this.header = header;
+		return this;
+	}
+
+	public GroupsDataStructure setFooter(String footer) {
+		this.footer = footer;
+		return this;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public GroupsDataStructure() {
 		 
 	}

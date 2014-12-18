@@ -20,6 +20,9 @@ import static com.example.tests.ContactsGenerator.GenNewString;
 public class TestBase {
 
 	protected  ApplicationManager app;
+	 
+	private int counterUI;
+	private int counterDB;
 
 	
 	
@@ -31,6 +34,7 @@ public class TestBase {
 		prop.load( new FileReader ( new File(props)));
 		
 		app = new ApplicationManager(prop);
+		
 	  } 
 
 	@AfterTest
@@ -82,6 +86,30 @@ public class TestBase {
 		 	
 		return list.iterator();
 	}
+	
+	protected boolean checking(String str) {
+		
+		if (str.equals("db")){
+			counterDB++;
+			if ( Integer.parseInt(app.getProperty("check.db-count")) > 0)
+						if (counterDB ==  Integer.parseInt(app.getProperty("check.db-count"))) { 
+							counterDB=0;
+								return true;
+								}
+		}
+		
+		if (str.equals("ui")){
+			counterUI++;
+		
+			if ( Integer.parseInt(app.getProperty("check.ui-count")) > 0)
+					if (counterUI ==  Integer.parseInt(app.getProperty("check.ui-count"))) { 
+						counterUI=0;
+						return true;
+						   
+					} 			   
+	 	}				   
+			return false;
+		}
 	
 	
 }

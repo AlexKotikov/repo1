@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
  
 
 
-public class NavigationHelper extends HelperBase {
+public class NavigationHelper extends WebDriverBasedHelperBase {
 
 	public NavigationHelper(ApplicationManager manager) {
 		super(manager);
